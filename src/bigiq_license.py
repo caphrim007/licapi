@@ -5,7 +5,7 @@
 #@Email: c.dubois@f5.com
 #@Description: License an unmanaged BIGIP. Utility reg keys.
 #@Product: BIGIQ
-#@VersionIntroduced: 5.1.0
+#@VersionIntroduced: 5.2.0
 
 """
 Copyright 2017 by F5 Networks Inc.
