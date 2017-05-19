@@ -5,7 +5,11 @@
 #@Email: c.dubois@f5.com
 #@Description: License an unmanaged BIGIP. Utility reg keys.
 #@Product: BIGIQ
+<<<<<<< HEAD
 #@VersionIntroduced: 5.1.0
+=======
+#@VersionIntroduced: 5.2.0
+>>>>>>> be9873fab08cb33ad0a1ac865640fb1e09bd5015
 
 """
 Copyright 2017 by F5 Networks Inc.
@@ -234,9 +238,14 @@ def clp(args):
         # Find a avalible Reg Key
         ##=========================
         print "INFO: Enumerate utility license to find license key"
+<<<<<<< HEAD
         uri = 'https://' + args.iq + '/mgmt/cm/device/licensing/pool/utility/licenses'
         response = requests.get(uri, auth=(args.iq_user, args.iq_pass), verify=False)
 
+=======
+        uri = 'https://' + args.iq + '/mgmt/cm/system/licensing/utility-licenses'
+        response = requests.get(uri, auth=(args.iq_user, args.iq_pass), verify=False)
+>>>>>>> be9873fab08cb33ad0a1ac865640fb1e09bd5015
         if response.status_code==200:
             ##=========================================================================================
             # A Utility Reg Key must be present. The below will attempt to find the one specified.
@@ -321,7 +330,11 @@ def clp(args):
         # Find a avalible Reg Key
         ##=========================
         print "INFO: Enumerate utility license to find license key"
+<<<<<<< HEAD
         uri = 'https://' + args.iq + '/mgmt/cm/device/licensing/pool/utility/licenses'
+=======
+        uri = 'https://' + args.iq + '/mgmt/cm/system/licensing/utility-licenses'
+>>>>>>> be9873fab08cb33ad0a1ac865640fb1e09bd5015
         response = requests.get(uri, auth=(args.iq_user, args.iq_pass), verify=False)
         if response.status_code==200:
             ##=========================================================================================
@@ -413,7 +426,11 @@ if __name__ == '__main__':
         for n in args.__dict__:
             if args.__dict__[n] == None:
                 print "\nERROR: Please pass in all arguments for REGKEY licensing.\n"
+<<<<<<< HEAD
                 os.system("python bigiq_license.py -h")
+=======
+                os.system("python license_sb_v5_jc.py -h")
+>>>>>>> be9873fab08cb33ad0a1ac865640fb1e09bd5015
                 exit(1)
         
         #==========================
@@ -428,7 +445,11 @@ if __name__ == '__main__':
         for n in args.__dict__:
             if args.op == 'grant' and args.__dict__[n] == None:
                 print "\nERROR: Please pass in all arguments for CLP licensing.\n"
+<<<<<<< HEAD
                 os.system("python bigiq_license.py -h")
+=======
+                os.system("python bigiqlicense.py -h")
+>>>>>>> be9873fab08cb33ad0a1ac865640fb1e09bd5015
                 exit(1)
 
         #==========================
@@ -437,7 +458,11 @@ if __name__ == '__main__':
         result_clp = clp(args) 
 
     else:
+<<<<<<< HEAD
         os.system("python bigiq_license.py -h")
+=======
+        os.system("python bigiqlicense.py -h")
+>>>>>>> be9873fab08cb33ad0a1ac865640fb1e09bd5015
         exit(1)
 
     if result_rk or result_clp == True:
