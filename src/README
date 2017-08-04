@@ -1,1 +1,33 @@
+# CLP/Utility
+python bigiq_license.py -name <POOL> -op revoke -type clp -iq <IQ> -iq_user admin -iq_pass admin -ip <IP> -port 443 -ip_user admin -ip_pass admin -feature BT -tput 25M -uom hourly
+# REGKEY
+python bigiq_license.py -name <POOL> -op revoke -type regkey -iq <IQ> -iq_user admin -iq_pass admin -ip <IP> -port 8443 -ip_user admin -ip_pass admin
+python bigiq_license.py -name <POOL> -op grant -type regkey -iq <IQ> -iq_user admin -iq_pass admin -ip <IP> -port 443 -ip_user admin -ip_pass admin
+
+./bigiq_license.py -h
+usage: bigiq_license.py [-h] [-op OP] [-name NAME] [-type TYPE] [-iq IQ]
+                        [-iq_user IQ_USER] [-iq_pass IQ_PASS] [-ip IP]
+                        [-port PORT] [-ip_user IP_USER] [-ip_pass IP_PASS]
+                        [-feature FEATURE] [-tput TPUT] [-uom UOM]
+
+License a unmanaged BIGIP using built in registration keys.
+
+optional arguments:
+  -h, --help        show this help message and exit
+  -op OP            To grant or revoke a license, options are: grant, revoke
+  -name NAME        Name of license pool in BIGIQ.
+  -type TYPE        License Key Type used by BIGIQ, options are: regkey or clp
+  -iq IQ            Network address of BIG-IQ.
+  -iq_user IQ_USER  Administrator username of BIGIP
+  -iq_pass IQ_PASS  Administrator password if BIGIP
+  -ip IP            Network address of BIG-IP to license.
+  -port PORT        Https port used for managment of BIGIP.
+  -ip_user IP_USER  Administrator username of BIGIP
+  -ip_pass IP_PASS  Administrator password if BIGIP
+  -feature FEATURE  (Required for CLP only) Feature set. ex. LTM | BETTER |
+                    BEST - matches on offering name
+  -tput TPUT        (Required for CLP only) Throughput. ex. 25M | 200M | 1G -
+                    matches on offering name
+  -uom UOM          (Required for CLP only) unit-of-measure. ex. hourly |
+                    daily | monthly
 
