@@ -131,12 +131,13 @@ def regkey(args):
                 if len(response.json()['items'])==0:
                     print 'INFO: There are no devices for offering: {0}. POST device {1} to be licensed'.format(offering.group(2), args.ip)
                     # POST data a device to this offering
-                    lic_json = {"deviceAddress": args.ip,"username": args.ip_user,"password": args.ip_pass}
+                    lic_json = {"deviceAddress": args.ip, "httpsPort": args.port, "username": args.ip_user,"password": args.ip_pass}
                     print "INFO: BIGIQ POST a reg key license from offering {0} to BIGIP device {1}".format(offering.group(2), args.ip)
                     response = requests.post(offerings[i], data=str(lic_json), auth=(args.ip_user, args.ip_pass), verify=False)
                 
                     print 'INFO: Test device {0} licensing status is LICENSED'.format(args.ip)
                     # Test if device is licensed.
+                    
                     if response.status_code==200:
                         while True:
                             response = requests.get(offerings[i], auth=(args.iq_user, args.iq_pass), verify=False)
@@ -169,6 +170,7 @@ def regkey(args):
         ##=========================
         print "Enumerate all Reg Key pool to find: {0}".format(args.name)
         uri = 'https://' + args.iq + '/mgmt/cm/device/licensing/pool/regkey/licenses'
+
         response = requests.get(uri, auth=(args.iq_user, args.iq_pass), verify=False)
         offerings=[]
         i=0
@@ -290,6 +292,9 @@ def clp(args):
                 lic_json = {"deviceAddress": args.ip,"username": args.ip_user,"password": args.ip_pass, "unitOfMeasure":args.uom}
                 response = requests.post(uri_clp, data=str(lic_json), auth=(args.ip_user, args.ip_pass), verify=False)
 
+                #print response.content
+                #sys.exit(1)
+
                 # Test if device is licensed.
                 if response.status_code==200:
                     while True:
@@ -389,6 +394,7 @@ if __name__ == '__main__':
     parser.add_argument('-iq_user', type=str, help='Administrator username of BIGIP')
     parser.add_argument('-iq_pass', type=str, help='Administrator password if BIGIP')
     parser.add_argument('-ip', type=str, help='Network address of BIG-IP to license.')
+    parser.add_argument('-port', type=str, help='Https port used for managment of BIGIP.')
     parser.add_argument('-ip_user', type=str, help='Administrator username of BIGIP')
     parser.add_argument('-ip_pass', type=str, help='Administrator password if BIGIP')
     parser.add_argument('-feature', type=str, help='(Required for CLP only) Feature set. ex. LTM | BETTER | BEST - matches on offering name')
